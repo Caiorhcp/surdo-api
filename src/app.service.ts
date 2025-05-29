@@ -1,21 +1,9 @@
-import { Injectable } from "@nestjs/common";
-
-interface HealthStatus {
-    status: string;
-    timestamp: string;
-    environment: string;
-    uptime: number;
-    memory: NodeJS.MemoryUsage;
-}
-
-interface AppInfo {
-    name: string;
-    version: string;
-}
+import { Injectable } from '@nestjs/common';
+import { HealthStatus, AppInfo } from './interfaces/app.interfaces';
 
 @Injectable()
 export class AppService {
-    private readonly appInfo = {
+    private readonly appInfo: AppInfo = {
         name: 'surdo-api',
         version: '1.0.0',
     };
@@ -25,7 +13,7 @@ export class AppService {
             status: 'Online',
             timestamp: new Date().toISOString(),
             environment: process.env.NODE_ENV || 'development',
-            uptime:process.uptime(),
+            uptime: process.uptime(),
             memory: process.memoryUsage(),
         };
     }
