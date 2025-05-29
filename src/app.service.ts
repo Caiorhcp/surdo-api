@@ -8,6 +8,11 @@ interface HealthStatus {
     memory: NodeJS.MemoryUsage;
 }
 
+interface AppInfo {
+    name: string;
+    version: string;
+}
+
 @Injectable()
 export class AppService {
     private readonly appInfo = {
@@ -25,7 +30,7 @@ export class AppService {
         };
     }
 
-    getAppInfo(): Record<string, any> {
+    getAppInfo(): AppInfo {
         return this.appInfo;
     }
 }
