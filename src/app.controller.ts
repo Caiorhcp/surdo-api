@@ -5,9 +5,12 @@ import { AppService } from "./app.service";
 export class AppController {
     constructor(private readonly appService: AppService) {}
 
-    @Get('health')
-    getHealthStatus(): Record<string, any> {
-        return this.appService.getHealthStatus();
+    @Get()
+    getHealthStatus() {
+        return {
+            status: 'online',
+            timestamp: new Date().toISOString(),
+            enviroment: process.env.NODE_ENV || 'development',
+        };
     }
-
 }
