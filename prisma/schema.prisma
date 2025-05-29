@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Professor {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  alunos    Aluno[]  // Relacionamento 1:N (um professor para vários alunos)
+  exercicios Exercicio[] // Exercícios criados pelo professor
+
+  FichaTreino FichaTreino[]
+}
+
+model Aluno {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  professor Professor @relation(fields: [professorId], references: [id])
+  professorId Int
+  exerciciosAluno ExercicioAluno[] // Exercícios atribuídos ao aluno
+
+  FichaTreino FichaTreino[]
+}
+
+model Exercicio {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  descricao   String
+  professor   Professor @relation(fields: [professorId], references: [id])
+  professorId Int
+  exerciciosAluno ExercicioAluno[]
+
+  ExercicioFichaTreino ExercicioFichaTreino[]
+}
+
+model ExercicioAluno {
+  id         Int      @id @default(autoincrement())
+  aluno      Aluno    @relation(fields: [alunoId], references: [id])
+  alunoId    Int
+  exercicio  Exercicio @relation(fields: [exercicioId], references: [id])
+  exercicioId Int
+  dataAtribuicao DateTime @default(now())
+  status     String   // Ex: "pendente", "concluido"
+}
+
+model FichaTreino {
+  id           Int                   @id @default(autoincrement())
+  nome         String
+  aluno        Aluno                 @relation(fields: [alunoId], references: [id])
+  alunoId      Int
+  professor    Professor             @relation(fields: [professorId], references: [id])
+  professorId  Int
+  exercicios   ExercicioFichaTreino[]
+  dataCriacao  DateTime              @default(now())
+}
+
+model ExercicioFichaTreino {
+  id            Int          @id @default(autoincrement())
+  fichaTreino   FichaTreino  @relation(fields: [fichaTreinoId], references: [id])
+  fichaTreinoId Int
+  exercicio     Exercicio    @relation(fields: [exercicioId], references: [id])
+  exercicioId   Int
+  ordem         Int
+  repeticoes    Int
+  series        Int
+}
