@@ -7,10 +7,11 @@ export class AppController {
 
     @Get()
     getHealthStatus() {
-        return {
-            status: 'online',
-            timestamp: new Date().toISOString(),
-            enviroment: process.env.NODE_ENV || 'development',
-        };
+        return this.appService.getHealthStatus();
+    }
+
+    @Get('version')
+    getVersion() {
+        return this.appService.getAppInfo();
     }
 }
