@@ -17,7 +17,8 @@ describe("Create User", () => {
 
       const user = await createUserUseCase.execute({
         name: "Giovanny Pintinho Mole", 
-        email: "pintinhomole123@gmail.com"
+        email: "pintinhomole123@gmail.com",
+        professorId: undefined, 
       })
 
       expect(userRepositoryInMemory.users).toEqual([user]);
