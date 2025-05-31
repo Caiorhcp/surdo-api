@@ -1,6 +1,6 @@
 //testes unitários aqui
-import { CreateProfessorUserUseCase } from './createProfessorUserUseCase';
-import { ProfessorRepositoryInMemory } from '../../repositories/ProfessorRepositoryInMemory';
+import { CreateProfessorUserUseCase } from '../../../professor/useCase/createUseCase/createProfessorUserUseCase';
+import { ProfessorRepositoryInMemory } from '../../../professor/repositories/ProfessorRepositoryInMemory';
 
 let createProfessorUserUseCase: CreateProfessorUserUseCase;
 let professorRepositoryInMemory: ProfessorRepositoryInMemory;

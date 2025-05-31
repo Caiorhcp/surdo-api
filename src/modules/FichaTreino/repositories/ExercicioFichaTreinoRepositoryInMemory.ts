@@ -1,5 +1,5 @@
 import { ExercicioFichaTreinoRepository } from './ExercicioFichaTreinoRepository';
-import { ExercicioFichaTreino } from './../entities/ExercicioFichaTreino';
+import { ExercicioFichaTreino } from '../entities/ExercicioFichaTreino';
 
 export class ExercicioFichaTreinoRepositoryInMemory implements ExercicioFichaTreinoRepository {
     public exerciciosFichaTreino: ExercicioFichaTreino [] = [];

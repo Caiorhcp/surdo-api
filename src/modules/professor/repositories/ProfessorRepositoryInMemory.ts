@@ -1,5 +1,5 @@
 import { ProfessorRepository } from '../repositories/ProfessorRepository';
-import { Professor } from './../entities/Professor';
+import { Professor } from '../entities/Professor';
 
 export class ProfessorRepositoryInMemory implements ProfessorRepository {
     public professores: Professor[] = [];
