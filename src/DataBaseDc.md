@@ -110,3 +110,18 @@ Para usar outro banco ou mockar o repositório em testes, basta criar uma nova c
 - Para gerar o Prisma Client, utilize `npx prisma generate`.
 
 ---
+
+
+Controller
+   ↓
+Use Case
+   ↓
+UserRepository (contrato)
+   ↓
+PrismaUserRepository (implementação)
+   ↓
+PrismaUserMapper
+   ↓
+PrismaService (Prisma Client)
+   ↓
+Banco de Dados (definido em schema.prisma)
