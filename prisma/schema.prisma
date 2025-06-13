@@ -9,64 +9,62 @@ datasource db {
 }
 
 model Professor {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   nome      String
   email     String   @unique
-  alunos    Aluno[]  // Relacionamento 1:N (um professor para vários alunos)
-  exercicios Exercicio[] // Exercícios criados pelo professor
-
+  // alunos    Aluno[]
+  exercicios Exercicio[]
   FichaTreino FichaTreino[]
 }
 
 model Aluno {
-  id        Int      @id @default(autoincrement())
-  nome      String
+  id        String   @id @default(uuid())
+  name      String
   email     String   @unique
-  professor Professor @relation(fields: [professorId], references: [id])
-  professorId Int
-  exerciciosAluno ExercicioAluno[] // Exercícios atribuídos ao aluno
-
-  FichaTreino FichaTreino[]
+  // professor Professor @relation(fields: [professorId], references: [id])
+  // professorId String
+  // exerciciosAluno ExercicioAluno[]
+  // FichaTreino FichaTreino[] 
+  createdAt DateTime
 }
 
 model Exercicio {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   nome        String
   descricao   String
   professor   Professor @relation(fields: [professorId], references: [id])
-  professorId Int
+  professorId String
   exerciciosAluno ExercicioAluno[]
-
   ExercicioFichaTreino ExercicioFichaTreino[]
 }
 
 model ExercicioAluno {
-  id         Int      @id @default(autoincrement())
-  aluno      Aluno    @relation(fields: [alunoId], references: [id])
-  alunoId    Int
+  id         String   @id @default(uuid())
+  //aluno      Aluno    @relation(fields: [alunoId], references: [id])
+  alunoId    String
   exercicio  Exercicio @relation(fields: [exercicioId], references: [id])
-  exercicioId Int
+  exercicioId String
   dataAtribuicao DateTime @default(now())
-  status     String   // Ex: "pendente", "concluido"
+  status     String
 }
 
 model FichaTreino {
-  id           Int                   @id @default(autoincrement())
+  id           String   @id @default(uuid())
   nome         String
-  aluno        Aluno                 @relation(fields: [alunoId], references: [id])
-  alunoId      Int
-  professor    Professor             @relation(fields: [professorId], references: [id])
-  professorId  Int
+  //aluno        Aluno    @relation(fields: [alunoId], references: [id])
+  alunoId      String
+  professor    Professor @relation(fields: [professorId], references: [id])
+  professorId  String
   exercicios   ExercicioFichaTreino[]
-  dataCriacao  DateTime              @default(now())
+  dataCriacao  DateTime @default(now())
 }
 
 model ExercicioFichaTreino {
-  id            Int          @id @default(autoincrement())
+  id            String   @id @default(uuid())
   fichaTreino   FichaTreino  @relation(fields: [fichaTreinoId], references: [id])
-  fichaTreinoId Int
+  fichaTreinoId String
   exercicio     Exercicio    @relation(fields: [exercicioId], references: [id])
-  exercicioId   Int
+  exercicioId   String
   ordem         Int
   repeticoes    Int
   series        Int

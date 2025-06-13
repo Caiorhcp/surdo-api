@@ -9,8 +9,8 @@ interface ExercicioSchema {
 }
 
 export class Exercicio {
-    props: ExercicioSchema;
-    _id: string;
+   private props: ExercicioSchema;
+   private _id: string;
 
     constructor(props: Replace<ExercicioSchema, { dataCriacao?: Date }>, id?: string) {
         this.props = {

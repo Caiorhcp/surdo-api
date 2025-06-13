@@ -9,8 +9,8 @@ interface UserSchema {
     }
 
 export class User {
-    props: UserSchema;
-    _id: string;
+    private props: UserSchema;
+    private _id: string;
     /**
      * Cria uma instância de User.
      * param props - Propriedades do usuário, incluindo nome, email e data de criação.
